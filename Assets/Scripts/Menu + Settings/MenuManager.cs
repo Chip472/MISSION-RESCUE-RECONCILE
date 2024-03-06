@@ -7,7 +7,8 @@ using TMPro;
 
 public class MenuManager : MonoBehaviour
 {
-    [SerializeField] Animator menuAnim;
+
+    [SerializeField] Animator menuAnim, loadAnim;
     [SerializeField] GameObject stopTimeline, menuActivate, menuObj;
     [SerializeField] GameObject disclaimer;
 
@@ -19,22 +20,31 @@ public class MenuManager : MonoBehaviour
     [SerializeField] GameObject menuTheme;
     [SerializeField] AudioSource buttonSFX;
 
-    [SerializeField] RectTransform blitzHand, blitzHand2;
+    [SerializeField] RectTransform blitzHand;
 
     [SerializeField] ButtonSettingsHover backButton;
+    [SerializeField] Button continueButton;
 
-    bool checkHandLoad = false;
+    string play;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        play = PlayerPrefs.GetString("play", "new");
+        if (play == "already")
+        {
+            continueButton.interactable = true;
+        }
+        else
+        {
+            continueButton.interactable = false;
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (stopTimeline.activeSelf)
+        if (stopTimeline.activeSelf || play == "already")
         {
             disclaimer.SetActive(false);
         }
@@ -43,12 +53,6 @@ public class MenuManager : MonoBehaviour
         {
             menuObj.SetActive(true);
             menuTheme.SetActive(true);
-        }
-
-        if (checkHandLoad)
-        {
-            blitzHand.GetComponent<RectTransform>().anchoredPosition += new Vector2(blitzHand.GetComponent<RectTransform>().anchoredPosition.x + 20, blitzHand.GetComponent<RectTransform>().anchoredPosition.y + 20);
-            Debug.Log(blitzHand.position);
         }
     }
 
@@ -66,8 +70,16 @@ public class MenuManager : MonoBehaviour
     IEnumerator LoadSceneAsync(int sceneID)
     {
         loadScene.SetActive(true);
-        checkHandLoad = true;
-        yield return new WaitForSeconds(2f);
+
+        yield return new WaitForSeconds(1f);
+        loadAnim.Play("LoadAnimTamThoi", 0);
+
+        yield return new WaitForSeconds(0.5f);
+        loadText.text = "100%";
+        loadingBar.localScale = new Vector2(1, 1);
+
+        yield return new WaitForSeconds(0.5f);
+        SceneManager.LoadScene(sceneID);
 
         //AsyncOperation op = SceneManager.LoadSceneAsync(sceneID);
         //float progress = op.progress;
