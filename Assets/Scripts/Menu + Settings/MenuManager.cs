@@ -23,7 +23,6 @@ public class MenuManager : MonoBehaviour
     [SerializeField] RectTransform blitzHand;
 
     [SerializeField] ButtonSettingsHover backButton;
-    [SerializeField] Button continueButton;
 
     string play;
 
@@ -31,22 +30,19 @@ public class MenuManager : MonoBehaviour
     void Start()
     {
         play = PlayerPrefs.GetString("play", "new");
-        if (play == "already")
-        {
-            continueButton.interactable = true;
-        }
-        else
-        {
-            continueButton.interactable = false;
-        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (stopTimeline.activeSelf || play == "already")
+        if (stopTimeline.activeSelf)
         {
             disclaimer.SetActive(false);
+        }
+        if (play == "already")
+        {
+            disclaimer.SetActive(false);
+            menuObj.SetActive(true);
         }
 
         if (menuActivate.activeSelf)

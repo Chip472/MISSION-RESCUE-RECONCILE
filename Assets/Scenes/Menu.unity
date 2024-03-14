@@ -3423,7 +3423,6 @@ MonoBehaviour:
   buttonSFX: {fileID: 1699040400}
   blitzHand: {fileID: 1638836075}
   backButton: {fileID: 110599828}
-  continueButton: {fileID: 1341301687}
 --- !u!1 &1025902658
 GameObject:
   m_ObjectHideFlags: 0
@@ -4687,7 +4686,7 @@ GameObject:
   - component: {fileID: 1341301685}
   - component: {fileID: 1341301687}
   m_Layer: 5
-  m_Name: Continue
+  m_Name: Gallery
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4709,7 +4708,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 185.87006, y: -25}
+  m_AnchoredPosition: {x: 185.87006, y: -84.7475}
   m_SizeDelta: {x: 371.7401, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1341301685
@@ -4732,7 +4731,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: CONTINUE
+  m_text: Gallery
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 26686c7d523ad52438fa892ba2e08016, type: 2}
   m_sharedMaterial: {fileID: 996097119422128612, guid: 26686c7d523ad52438fa892ba2e08016, type: 2}
@@ -4848,7 +4847,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 0
+  m_Interactable: 1
   m_TargetGraphic: {fileID: 1341301685}
   m_OnClick:
     m_PersistentCalls:
@@ -4866,7 +4865,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bgButton: {fileID: 1370792916}
-  bgY: 600
+  bgY: 540
 --- !u!1 &1365035100
 GameObject:
   m_ObjectHideFlags: 0
@@ -4881,7 +4880,7 @@ GameObject:
   - component: {fileID: 1365035103}
   - component: {fileID: 1365035102}
   m_Layer: 5
-  m_Name: New game
+  m_Name: Play
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4903,7 +4902,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 185.87006, y: -84.7475}
+  m_AnchoredPosition: {x: 185.87006, y: -25}
   m_SizeDelta: {x: 371.7401, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1365035102
@@ -4994,7 +4993,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: new game
+  m_text: play
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 26686c7d523ad52438fa892ba2e08016, type: 2}
   m_sharedMaterial: {fileID: 996097119422128612, guid: 26686c7d523ad52438fa892ba2e08016, type: 2}
@@ -5084,7 +5083,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bgButton: {fileID: 1370792916}
-  bgY: 540
+  bgY: 600
 --- !u!1 &1370792916
 GameObject:
   m_ObjectHideFlags: 0
@@ -5122,7 +5121,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 327.25, y: 540}
+  m_AnchoredPosition: {x: 327.25, y: 600}
   m_SizeDelta: {x: 332.11, y: 54.07}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1370792918
@@ -5526,8 +5525,8 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1341301684}
   - {fileID: 1365035101}
+  - {fileID: 1341301684}
   - {fileID: 61421082}
   - {fileID: 1602607976}
   m_Father: {fileID: 427776147}

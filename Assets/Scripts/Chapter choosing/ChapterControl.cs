@@ -73,6 +73,7 @@ public class ChapterControl : MonoBehaviour
 
     private void OnApplicationQuit()
     {
-        
+        PlayerPrefs.SetString("play", "quit");
+        //set playerpref to quit so it turns the disclaimer on when go back into game
     }
 }

@@ -15,6 +15,8 @@ public class Dialogue1 : MonoBehaviour
     [SerializeField] private GameObject nameText;
     [SerializeField] private GameObject[] scene;
 
+    [SerializeField] private Animator screenshake;
+
     public bool end = false;
 
     public int index;
@@ -87,6 +89,7 @@ public class Dialogue1 : MonoBehaviour
         } 
         else if (index == 4)
         {
+            screenshake.Play("ScreenShake", 0);//screen shake
             nameText.GetComponent<TMP_Text>().text = "BLITZO";
         }
         else if (index == 5)
