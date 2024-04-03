@@ -8,6 +8,8 @@ public class ChapterDialogueControl : MonoBehaviour
     [SerializeField] private GameObject chapterTitle, dialogue1, textbox1;
     [SerializeField] private Animator transition;
 
+    [SerializeField] private GameObject combatUI;
+
     bool check;
 
     // Start is called before the first frame update
@@ -44,6 +46,8 @@ public class ChapterDialogueControl : MonoBehaviour
         chapter1.SetActive(false);
         dialogue1.SetActive(false);
         transition.SetBool("fade out", false);
+
+        combatUI.SetActive(true);
 
         check = true;
     }

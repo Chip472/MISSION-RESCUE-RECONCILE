@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -10,6 +10,9 @@ public class SettingsManager : MonoBehaviour
     [SerializeField] private Slider masterSlider, musicSlider, sfxSlider;
     [SerializeField] private AudioMixer myMixer;
     [SerializeField] private TMP_Dropdown resoDropdown;
+    [SerializeField] private Toggle fullScreenToggle;
+
+    private bool isFullScreen;
 
     Resolution[] resolutions;
 
@@ -39,6 +42,17 @@ public class SettingsManager : MonoBehaviour
         resoDropdown.value = currentResoIndex;
         resoDropdown.RefreshShownValue();
 
+        // sự kiện khi giá trị của Dropdown thay đổi
+        resoDropdown.onValueChanged.AddListener(delegate {
+            SetResolution(resoDropdown.value);
+        });
+
+        // Lấy giá trị được lưu từ PlayerPrefs
+        int selectedIndex = PlayerPrefs.GetInt("indexScreenSize", 0); // Giá trị mặc định là 0 nếu không có giá trị được lưu trước đó
+
+        // Thiết lập giá trị này cho Dropdown
+        resoDropdown.value = selectedIndex;
+
         //Setup my volume mixer
         if (PlayerPrefs.HasKey("musicVolume"))
         {
@@ -49,6 +63,12 @@ public class SettingsManager : MonoBehaviour
             SetMusicVolume();
             SetSFXVolume();
             SetMasterVolume();
+        }
+
+        // Set Screen Size
+        if (PlayerPrefs.HasKey("fullScreen"))
+        {
+            fullScreenToggle.isOn = (PlayerPrefs.GetInt("fullScreen") == 0) ? false : true; 
         }
     }
 
@@ -82,14 +102,19 @@ public class SettingsManager : MonoBehaviour
         SetMasterVolume();
     }
 
-    public void SetFullscreen(bool isFullscreen)
+    public void SetFullscreen()
     {
-        Screen.fullScreen = isFullscreen;
+        Screen.fullScreen = fullScreenToggle.isOn;
+        this.isFullScreen = fullScreenToggle.isOn;
+
+        PlayerPrefs.SetInt("fullScreen", (fullScreenToggle.isOn == false) ? 0 : 1);
     }
 
     public void SetResolution(int resolutionIndex)
     {
         Resolution resolution = resolutions[resolutionIndex];
-        Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
+        Screen.SetResolution(resolution.width, resolution.height, isFullScreen);
+
+        PlayerPrefs.SetInt("indexScreenSize", resolutionIndex);
     }
 }
