@@ -24,6 +24,8 @@ public class MenuManager : MonoBehaviour
 
     [SerializeField] ButtonSettingsHover backButton;
 
+    [SerializeField] GameObject galleryObj;
+
     string play;
 
     // Start is called before the first frame update
@@ -111,6 +113,16 @@ public class MenuManager : MonoBehaviour
         //    Debug.Log(blitzHand.position);
         //}
 
+    }
+
+    public void Gallery()
+    {
+        galleryObj.SetActive(true);
+    }
+
+    public void CloseGallery()
+    {
+        galleryObj.SetActive(false);
     }
 
     public void Settings()
