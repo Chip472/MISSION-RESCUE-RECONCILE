@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 public class ChapterControl : MonoBehaviour
 {
     [SerializeField] private Animator chapterAnim;
+    [SerializeField] private GameObject transi;
     int count;
 
     // Start is called before the first frame update
@@ -58,7 +59,7 @@ public class ChapterControl : MonoBehaviour
 
     IEnumerator TransiDelay(int scene)
     {
-        chapterAnim.Play("End", 0);
+        transi.SetActive(true);
         yield return new WaitForSeconds(1f);
         SceneManager.LoadScene(scene);
     }
