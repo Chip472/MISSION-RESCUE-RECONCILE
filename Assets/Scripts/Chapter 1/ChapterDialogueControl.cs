@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ChapterDialogueControl : MonoBehaviour
 {
@@ -10,7 +11,14 @@ public class ChapterDialogueControl : MonoBehaviour
 
     [SerializeField] private GameObject combatUI;
 
+    [SerializeField] private PlayerController player;
+    [SerializeField] private GameObject enemyParent;
+
+    [SerializeField] private GameObject[] hearts;
+    [SerializeField] private GameObject winScene, loseScene;
+
     bool check;
+
 
     // Start is called before the first frame update
     void Start()
@@ -25,6 +33,28 @@ public class ChapterDialogueControl : MonoBehaviour
         {
             transition.SetBool("fade out", true);
             StartCoroutine(DelayEndCutscene());
+        }
+
+        if (player.heartsNum == 2)
+        {
+            hearts[2].SetActive(false);
+        }
+        else if (player.heartsNum == 1)
+        {
+            hearts[1].SetActive(false);
+        }
+        else if (player.heartsNum == 0)
+        {
+            hearts[0].SetActive(false);
+            loseScene.SetActive(true);
+            player.enabled = false;
+            enemyParent.transform.GetComponentInChildren<EnemyController>().enabled = false;
+        }
+
+        if (enemyParent.transform.childCount == 0)
+        {
+            winScene.SetActive(true);
+            player.enabled = false;
         }
     }
 
@@ -50,5 +80,15 @@ public class ChapterDialogueControl : MonoBehaviour
         combatUI.SetActive(true);
 
         check = true;
+    }
+
+    public void ResetChap1()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    public void NextLevel()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 }

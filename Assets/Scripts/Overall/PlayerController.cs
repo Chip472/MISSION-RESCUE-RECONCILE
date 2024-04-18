@@ -10,8 +10,12 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Animator playerAnim;
     [SerializeField] private GameObject gunEffect;
 
+    public int heartsNum = 3;
+
     float horizontalMove = 0f;
     bool gunEffectCheck = false;
+
+    bool jump;
 
     // Update is called once per frame
     void Update()
@@ -33,6 +37,20 @@ public class PlayerController : MonoBehaviour
                 StartCoroutine(DelayGunEffect());
             }
         }
+
+        if (Input.GetKeyDown(KeyCode.W))
+        {
+            jump = true;
+            playerAnim.SetBool("jump", true);
+            StartCoroutine(DelayJump());
+        }
+    }
+
+    IEnumerator DelayJump()
+    {
+        yield return new WaitForSeconds(0.5f);
+        jump = false;
+        playerAnim.SetBool("jump", false);
     }
 
     IEnumerator DelayGunEffect()
@@ -52,6 +70,14 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        controller.Move(horizontalMove * Time.fixedDeltaTime, false, false);
+        controller.Move(horizontalMove * Time.fixedDeltaTime, false, jump);
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Enemy")
+        {
+            heartsNum--;
+        }
     }
 }

@@ -45,6 +45,7 @@ public class MenuManager : MonoBehaviour
         {
             disclaimer.SetActive(false);
             menuObj.SetActive(true);
+            menuTheme.SetActive(true);
         }
 
         if (menuActivate.activeSelf)
