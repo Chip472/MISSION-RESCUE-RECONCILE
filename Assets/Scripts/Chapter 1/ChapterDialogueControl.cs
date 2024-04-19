@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -35,9 +35,9 @@ public class ChapterDialogueControl : MonoBehaviour
             StartCoroutine(DelayEndCutscene());
         }
 
-        if (player.heartsNum == 2)
+        if (player.heartsNum == 2) //lấy heartsNum từ script PlayerController của Blitz để so sánh
         {
-            hearts[2].SetActive(false);
+            hearts[2].SetActive(false); //nếu bằng 2 (mất 1 mạng) thì tắt tim thứ 3 đi
         }
         else if (player.heartsNum == 1)
         {
@@ -45,16 +45,16 @@ public class ChapterDialogueControl : MonoBehaviour
         }
         else if (player.heartsNum == 0)
         {
-            hearts[0].SetActive(false);
-            loseScene.SetActive(true);
-            player.enabled = false;
-            enemyParent.transform.GetComponentInChildren<EnemyController>().enabled = false;
+            hearts[0].SetActive(false); //mạng bằng 0 thì tắt tim cuối cùng
+            loseScene.SetActive(true); //hiển thị màn hình thua cuộc
+            player.enabled = false; //khóa player lại cho người chơi không di chuyển được nữa
+            enemyParent.transform.GetComponentInChildren<EnemyController>().enabled = false; //khóa quái lại cho quái không di chuyển nữa
         }
 
-        if (enemyParent.transform.childCount == 0)
+        if (enemyParent.transform.childCount == 0) //check xem trong phụ huynh "enemies" có còn con không, nếu không thì ng chơi thắng
         {
-            winScene.SetActive(true);
-            player.enabled = false;
+            winScene.SetActive(true); //hiển thị màn hình thắng
+            player.enabled = false; //khóa player lại cho người chơi không di chuyển được nữa
         }
     }
 

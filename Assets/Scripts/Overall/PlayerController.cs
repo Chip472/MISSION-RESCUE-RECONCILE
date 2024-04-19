@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -20,7 +20,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        horizontalMove = Input.GetAxisRaw("Horizontal") * runSpeed;
+        horizontalMove = Input.GetAxisRaw("Horizontal") * runSpeed; //Lấy trục tọa độ => Khi bấm A hoặc mũi tên bên trái thì horizontalMove = -1; bấm D hoặc mũi tên bên phải thì horizontalMove = 1
         if (horizontalMove != 0)
         {
             playerAnim.SetBool("run", true);
@@ -34,7 +34,7 @@ public class PlayerController : MonoBehaviour
         {
             if (!gunEffectCheck)
             {
-                StartCoroutine(DelayGunEffect());
+                StartCoroutine(DelayGunEffect()); //hiệu ứng bắn súng hiện ra
             }
         }
 
@@ -70,14 +70,14 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        controller.Move(horizontalMove * Time.fixedDeltaTime, false, jump);
+        controller.Move(horizontalMove * Time.fixedDeltaTime, false, jump); //Gọi script còn lại để add lực để đẩy vào nhân vật
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnCollisionEnter2D(Collision2D collision) //xử lý va chạm với quái
     {
         if (collision.gameObject.tag == "Enemy")
         {
-            heartsNum--;
+            heartsNum--; //trừ mạng nếu chạm phải enemy
         }
     }
 }
